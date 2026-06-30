@@ -397,23 +397,28 @@ export function createFallbackAnalysis(decision: string, context: string[] = [])
     confidence: 68 + (idx * 5),
   }));
 
-  const categorySpots = contextualBlindSpots[category] || contextualBlindSpots.general;
-  const blindSpots: EvidenceBackedItem[] = categorySpots.map((question, idx) => ({
-    title: question,
-    why: "This question exposes an assumption you haven't tested.",
-    evidence: `Patterns in ${categoryLabels[category].toLowerCase()} decisions suggest this blind spot is common.`,
-    reasoning: "Spend 5 minutes answering this honestly.",
-    confidence: 65 + (idx * 4),
-  }));
+  // BLIND SPOTS - Category-specific
+const categorySpots =
+  contextualBlindSpots[category] ?? contextualBlindSpots.general;
+const blindSpots: EvidenceBackedItem[] = categorySpots.map((spot, idx) => ({
+  title: `Blind Spot ${idx + 1}`,
+  why: spot,
+  evidence: `Specific to ${categoryLabels[category].toLowerCase()} decisions.`,
+  reasoning: spot,
+  confidence: 70 + idx * 5,
+}));
 
-  const categoryAlts = contextualAlternatives[category] || contextualAlternatives.general;
-  const betterAlternatives: EvidenceBackedItem[] = categoryAlts.map((alt, idx) => ({
-    title: alt,
-    why: `This approach removes urgency and creates a validation step before full commitment.`,
-    evidence: "Practical for this decision category.",
-    reasoning: "Test the assumption with minimal downside first.",
-    confidence: 72 + (idx * 3),
-  }));
+// BETTER ALTERNATIVES - Category-specific
+const categoryAlts =
+  contextualAlternatives[category] ?? contextualAlternatives.general;
+const betterAlternatives: EvidenceBackedItem[] = categoryAlts.map((alt, idx) => ({
+  title: `Alternative ${idx + 1}`,
+  why: alt,
+  evidence: "Practical for this decision category.",
+  reasoning: alt,
+  confidence: 72 + idx * 3,
+}));
+
 
   const biasConfig: Record<DecisionCategory, string[]> = {
     career: ["FOMO", "Loss Aversion", "Overconfidence"],

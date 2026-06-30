@@ -111,7 +111,7 @@ export default function LandingPage() {
             transition={{ duration: 0.8, delay: 0.18 }}
             className="mt-2 max-w-2xl text-balance text-sm leading-6 text-white/48 sm:text-base"
           >
-            Analyze risks, uncover blind spots, and explore possible outcomes before making life's biggest decisions.
+            Analyze risks, uncover blind spots, and explore possible outcomes before making life&apos;s biggest decisions.
           </motion.p>
 
           <motion.form
@@ -132,6 +132,26 @@ export default function LandingPage() {
               <ArrowRight className="h-4 w-4" />
             </Button>
           </motion.form>
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.35 }}
+            className="mt-6 w-full max-w-3xl"
+          >
+            <p className="mb-3 text-xs uppercase tracking-[0.12em] text-white/45">Try an example</p>
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+              {suggestions.map((suggestion) => (
+                <button
+                  key={suggestion}
+                  onClick={() => router.push(`/analysis?decision=${encodeURIComponent(suggestion)}`)}
+                  className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-left text-sm text-white/56 transition-all hover:border-white/20 hover:bg-white/[0.08] hover:text-white/72"
+                >
+                  {suggestion}
+                </button>
+              ))}
+            </div>
+          </motion.div>
 
           <motion.div
   initial={{ opacity: 0, y: 18 }}
