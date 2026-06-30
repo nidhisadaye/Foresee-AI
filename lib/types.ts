@@ -67,6 +67,27 @@ export type ComparisonResult = {
   finalRecommendation: string;
 };
 
+export type ContextQuality = {
+  score: number;
+  label: "Strong" | "Usable" | "Thin" | "Insufficient";
+  missingSignals: string[];
+};
+
+export type DecisionLever = {
+  name: string;
+  impact: number;
+  effort: number;
+  description: string;
+};
+
+export type ScenarioBranch = {
+  name: "Best Case" | "Base Case" | "Worst Case";
+  probability: number;
+  outcome: string;
+  trigger: string;
+  earlySignal: string;
+};
+
 export type AnalysisSuccess = {
   status: "analysis";
   decision: string;
@@ -75,6 +96,10 @@ export type AnalysisSuccess = {
   executiveSummary: string;
   assumptions: string[];
   uncertainty: string;
+  contextQuality: ContextQuality;
+  informationGaps: string[];
+  decisionLevers: DecisionLever[];
+  scenarioBranches: ScenarioBranch[];
   decisionQualityScore: number;
   decisionQualityLabel: "Excellent" | "Good" | "Needs More Information" | "High Risk";
   qualityDimensions: QualityDimension[];

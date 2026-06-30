@@ -77,7 +77,7 @@ export default function LandingPage() {
             className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.055] px-4 py-2 text-sm text-white/68 backdrop-blur-xl"
           >
             <span className="h-2 w-2 rounded-full bg-teal-300 shadow-[0_0_18px_rgba(94,234,212,0.8)]" />
-            AI Decision Intelligence Platform
+            Premium Decision Intelligence
           </motion.div>
 
           <motion.h1
@@ -102,7 +102,16 @@ export default function LandingPage() {
             transition={{ duration: 0.8, delay: 0.18 }}
             className="mt-4 max-w-2xl text-balance text-base leading-7 text-white/48 sm:text-lg"
           >
-            Simulate possible futures before important choices become expensive commitments.
+            See the consequences before they become reality.
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.18 }}
+            className="mt-2 max-w-2xl text-balance text-sm leading-6 text-white/48 sm:text-base"
+          >
+            Analyze risks, uncover blind spots, and explore possible outcomes before making life's biggest decisions.
           </motion.p>
 
           <motion.form
@@ -125,42 +134,46 @@ export default function LandingPage() {
           </motion.form>
 
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.28 }}
-            className="glass mt-4 grid w-full max-w-3xl gap-3 rounded-2xl p-3 sm:grid-cols-[1fr_auto_1fr]"
-          >
-            <Input
-              value={optionA}
-              onChange={(event) => setOptionA(event.target.value)}
-              placeholder="Compare option A"
-              className="h-12 rounded-2xl border-white/8 bg-white/[0.04] text-sm"
-            />
-            <div className="flex items-center justify-center rounded-full border border-white/10 px-4 text-xs text-white/45">VS</div>
-            <Input
-              value={optionB}
-              onChange={(event) => setOptionB(event.target.value)}
-              placeholder="Compare option B"
-              className="h-12 rounded-2xl border-white/8 bg-white/[0.04] text-sm"
-            />
-          </motion.div>
+  initial={{ opacity: 0, y: 18 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, delay: 0.28 }}
+  className="mt-4 flex justify-center"
+>
+  <Button
+    variant="secondary"
+    onClick={() => {
+      const element = document.getElementById("compare-section");
+      element?.scrollIntoView({ behavior: "smooth" });
+    }}
+  >
+    <GitCompare className="h-4 w-4" />
+    Compare Options
+  </Button>
+</motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.32 }}
-            className="mt-5 flex max-w-4xl flex-wrap justify-center gap-2"
-          >
-            {suggestions.map((suggestion) => (
-              <button
-                key={suggestion}
-                onClick={() => setDecision(suggestion)}
-                className="rounded-full border border-white/10 bg-white/[0.045] px-4 py-2 text-sm text-white/58 transition hover:border-white/20 hover:bg-white/[0.08] hover:text-white"
-              >
-                {suggestion}
-              </button>
-            ))}
-          </motion.div>
+{/* Compare Mode (Hidden by Default) */}
+<motion.div
+  id="compare-section"
+  initial={{ opacity: 0, y: 18 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, delay: 0.32 }}
+  className="glass mt-8 grid w-full max-w-3xl gap-3 rounded-2xl p-3 sm:grid-cols-[1fr_auto_1fr]"
+>
+  <Input
+    value={optionA}
+    onChange={(event) => setOptionA(event.target.value)}
+    placeholder="Compare option A"
+    className="h-12 rounded-2xl border-white/8 bg-white/[0.04] text-sm"
+  />
+  <div className="flex items-center justify-center rounded-full border border-white/10 px-4 text-xs text-white/45">VS</div>
+  <Input
+    value={optionB}
+    onChange={(event) => setOptionB(event.target.value)}
+    placeholder="Compare option B"
+    className="h-12 rounded-2xl border-white/8 bg-white/[0.04] text-sm"
+  />
+</motion.div>
+
         </section>
 
         <motion.section
